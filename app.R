@@ -2,8 +2,23 @@ library(shiny)
 library(shinydashboard)
 library(readr)
 library(dplyr)
+library(dbplyr)
 
-source('Connection.R')
+run_query <- function(query) {
+  require(dbplyr)
+  require(RPostgres)
+  require(DBI)
+  conn_host 	<- '35.194.80.242'
+  conn_dbname <- 'text-data'
+  conn_user 	<- 'postgres'
+  conn_port 	<- '5432'
+  conn_pw     <- 'vdztVxOwJ^6B'
+  con   <- dbConnect(Postgres(), dbname = conn_dbname, host = conn_host, port = conn_port, user = conn_user, password = conn_pw)
+  query_result <- dbGetQuery(con, query)
+  dbDisconnect(con)
+  return(query_result)
+}
+#source('Connection.R')
 
 # Loads a local table of results from a correlated dirichlet allocation classifcation
 ctm <- read_csv(url("https://drive.google.com/uc?id=1rUWKfmq9FT6OkZhtVwTOQV9YgIIx8Pag"), col_types = 'iDiciiiiiddddd')
