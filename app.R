@@ -6,7 +6,7 @@ library(dplyr)
 source('Connection.R')
 
 # Loads a local table of results from a correlated dirichlet allocation classifcation
-ctm <- read_csv("Ref_Tbls/ctm_cats.csv", col_types = 'iDiciiiiiddddd')
+ctm <- read_csv(url("https://drive.google.com/uc?id=1rUWKfmq9FT6OkZhtVwTOQV9YgIIx8Pag"), col_types = 'iDiciiiiiddddd')
 
 ui <- shinyUI(
   fluidPage(
